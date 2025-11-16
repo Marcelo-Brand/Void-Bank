@@ -72,9 +72,12 @@ int main(){
                 getchar();
                 system("cls");
                 break;
+<<<<<<< Updated upstream
             
+=======
+>>>>>>> Stashed changes
                 
-            case 3: // Aplicar poupanca
+            case 3: 
                 printf("\nQual o valor a ser aplicado na poupanca?\nR$"); 
                 scanf(" %lf", &valor_em_reais);
                 valor_em_centavos = (long long)(valor_em_reais * 100 + 0.5);
@@ -96,7 +99,7 @@ int main(){
                 while (getchar() != '\n');
                 getchar();
                 system("cls");
-                break;
+                break; // Aplicar poupanca
                 
             case 4: // Resgatar poupanca
                 printf("\nQual o valor a ser rasgatado na poupanca?\n R$");
