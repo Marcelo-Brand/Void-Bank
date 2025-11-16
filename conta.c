@@ -2,6 +2,7 @@
 #include "conta.h"
 #include <string.h>
 #include <time.h>
+#include <math.h>
 
 static Conta usuario;
 
@@ -131,11 +132,37 @@ int fazer_pix(const char destino[], long long valor){
 } //tirar dinheiro da conta e transferir para a chave pix
 
 void render_poupanca(double rendimento_mensal){
-
+    long long rendimento_em_centavos = (long long)round((usuario.saldo_poupanca / 100.0) * rendimento_mensal * 100);
+    if (rendimento_em_centavos <= 0){
+        return;
+    }
+    if (usuario.nlog >= MAX_TRANS){
+        return; 
+    }
+    usuario.saldo_poupanca += rendimento_em_centavos;
+    usuario.log[usuario.nlog].tipo = REND;
+    usuario.log[usuario.nlog].valor = rendimento_em_centavos;
+    usuario.log[usuario.nlog].saldo_corrente_apos = usuario.saldo_corrente;
+    usuario.log[usuario.nlog].saldo_poupanca_apos = usuario.saldo_poupanca;
+    data_horario(usuario.log[usuario.nlog].quando, 20);
+    usuario.nlog ++;
 } //colocar na conta o rendimento mensal da poupança
 
 int receber_pix(long long valor){
-    
+    if (valor <= 0){
+        return ERRO_VALOR_INVALIDO;
+    }
+    if (usuario.nlog >= MAX_TRANS){
+        return ERRO_CAPACIDADE_LOG;
+    }
+    usuario.saldo_corrente += valor;
+    usuario.log[usuario.nlog].tipo = PIXR;
+    usuario.log[usuario.nlog].valor = valor;
+    usuario.log[usuario.nlog].saldo_corrente_apos = usuario.saldo_corrente;
+    usuario.log[usuario.nlog].saldo_poupanca_apos = usuario.saldo_poupanca;
+    data_horario(usuario.log[usuario.nlog].quando, 20);
+    usuario.nlog ++;
+    return OK;
 } //creditar um pix recebido na conta
 
 long long saldo_corrente(void){
