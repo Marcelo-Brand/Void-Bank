@@ -3,6 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include <stdlib.h>
+#include <math.h>
 
 int main(){
     double valor_em_reais;
@@ -31,7 +32,7 @@ int main(){
             case 1: // Deposito
                 printf("\nQual o valor do deposito?\nR$");
                 scanf(" %lf", &valor_em_reais);
-                valor_em_centavos = (long long)(valor_em_reais * 100 + 0.5);
+                valor_em_centavos = (long long)round(valor_em_reais * 100);
                 int status = depositar(valor_em_centavos);
                 if (status == ERRO_CAPACIDADE_LOG){
                     printf("Limite de transacoes atingido. \n");
@@ -53,7 +54,7 @@ int main(){
             case 2: 
                 printf("\nQual o valor do saque?\nR$");
                 scanf(" %lf", &valor_em_reais);
-                valor_em_centavos = (long long)(valor_em_reais * 100 + 0.5);
+                valor_em_centavos = (long long)round(valor_em_reais * 100);
                 status = sacar(valor_em_centavos);
                 if (status == ERRO_SALDO_INSUFICIENTE){
                     printf("Saldo indisponivel.\n"); 
@@ -76,7 +77,7 @@ int main(){
             case 3: 
                 printf("\nQual o valor a ser aplicado na poupanca?\nR$"); 
                 scanf(" %lf", &valor_em_reais);
-                valor_em_centavos = (long long)(valor_em_reais * 100 + 0.5);
+                valor_em_centavos = (long long)round(valor_em_reais * 100);
                 status = aplicar_poupanca(valor_em_centavos);
                 if (status == ERRO_SALDO_INSUFICIENTE){
                     printf("Saldo indisponivel.\n"); 
@@ -100,7 +101,7 @@ int main(){
             case 4: // Resgatar poupanca
                 printf("\nQual o valor a ser rasgatado na poupanca?\n R$");
                 scanf(" %lf", &valor_em_reais);
-                valor_em_centavos = (long long)(valor_em_reais * 100 + 0.5);
+                valor_em_centavos = (long long)round(valor_em_reais * 100);
                 status = resgatar_poupanca(valor_em_centavos);
                 if (status == ERRO_SALDO_INSUFICIENTE){
                     printf("Saldo indisponivel.\n"); 
@@ -127,7 +128,7 @@ int main(){
                 char chave[20];
                 printf("\nQual a chave pix?\n");
                 scanf(" %s", chave);
-                valor_em_centavos = (long long)(valor_em_reais * 100 + 0.5);
+                valor_em_centavos = (long long)round(valor_em_reais * 100);
                 status = fazer_pix(chave, valor_em_centavos);
                 if (status == ERRO_SALDO_INSUFICIENTE){
                     printf("Saldo indisponivel.\n"); 

@@ -33,6 +33,7 @@ int depositar(long long valor){
     usuario.log[usuario.nlog].saldo_poupanca_apos = usuario.saldo_poupanca;
     data_horario(usuario.log[usuario.nlog].quando, 20);
     usuario.nlog ++;
+    return OK;
 }
 
 int sacar(long long valor){
