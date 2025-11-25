@@ -14,6 +14,6 @@ VoidBank é um simulador de conta bancária com interface textual, desenvolvido 
 8. Sair
 
 > [!TIP]
-> Funcoes como Simular Rendimento da Poupanca e Simular Recebimento de pix podem ser acessadas pelo terminal respectivamente com 9 e 10.
+> <img src="./gatinho.jpg" alt="Texto alternativo" width="500"/>
 
-<img src="./gatinho.jpg" alt="Texto alternativo" width="500"/>
+
